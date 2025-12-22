@@ -1,17 +1,18 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Gift } from 'lucide-react';
 
 const navItems = [
-  { name: 'Welcome to BetLabel', href: '#welcome' },
-  { name: 'Why choose us', href: '#features' },
-  { name: 'Sports betting', href: '#categories' },
-  { name: 'Popular sports', href: '#categories' },
-  { name: 'Live betting', href: '#categories' },
-  { name: 'Esports', href: '#categories' },
-  { name: 'Casino', href: '#categories' },
-  { name: 'Slot machines', href: '#categories' },
-  { name: 'FAQ', href: '#faq' },
+  { name: 'Welcome to BetLabel', href: '/#welcome', isAnchor: true },
+  { name: 'Why choose us', href: '/why-choose-us', isAnchor: false },
+  { name: 'Sports betting', href: '/#categories', isAnchor: true },
+  { name: 'Popular sports', href: '/#categories', isAnchor: true },
+  { name: 'Live betting', href: '/#categories', isAnchor: true },
+  { name: 'Esports', href: '/#categories', isAnchor: true },
+  { name: 'Casino', href: '/#categories', isAnchor: true },
+  { name: 'Slot machines', href: '/#categories', isAnchor: true },
+  { name: 'FAQ', href: '/#faq', isAnchor: true },
 ];
 
 const Header = () => {
@@ -65,13 +66,23 @@ const Header = () => {
         <div className="container py-2">
           <nav className="flex items-center gap-6 overflow-x-auto scrollbar-hide">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-sm text-muted-foreground hover:text-primary whitespace-nowrap transition-colors duration-200"
-              >
-                {item.name}
-              </a>
+              item.isAnchor ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm text-muted-foreground hover:text-primary whitespace-nowrap transition-colors duration-200"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-sm text-muted-foreground hover:text-primary whitespace-nowrap transition-colors duration-200"
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
           </nav>
         </div>
@@ -82,14 +93,25 @@ const Header = () => {
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="container py-4 flex flex-col gap-2">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
-              >
-                {item.name}
-              </a>
+              item.isAnchor ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
             <div className="flex gap-2 mt-4 sm:hidden">
               <Button variant="register" size="sm" className="flex-1">
