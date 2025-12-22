@@ -8,11 +8,6 @@ const navItems = [
   { name: 'Why choose us', href: '/why-choose-us', isAnchor: false },
   { name: 'Sports betting', href: '/#categories', isAnchor: true },
   { name: 'Popular sports', href: '/#categories', isAnchor: true },
-  { name: 'Live betting', href: '/#categories', isAnchor: true },
-  { name: 'Esports', href: '/#categories', isAnchor: true },
-  { name: 'Casino', href: '/#categories', isAnchor: true },
-  { name: 'Slot machines', href: '/#categories', isAnchor: true },
-  { name: 'FAQ', href: '/#faq', isAnchor: true },
 ];
 
 const Header = () => {
@@ -36,8 +31,25 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
-          <span className="text-muted-foreground mr-2">Home</span>
+        <nav className="hidden lg:flex items-center gap-4">
+          <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+            Home
+          </Link>
+          <Link to="/live-betting" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+            Live betting
+          </Link>
+          <Link to="/esports" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+            Esports
+          </Link>
+          <Link to="/casino" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+            Casino
+          </Link>
+          <Link to="/slot-machines" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+            Slot machines
+          </Link>
+          <Link to="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+            FAQ
+          </Link>
         </nav>
 
         {/* Auth Buttons */}
@@ -92,6 +104,48 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="container py-4 flex flex-col gap-2">
+            <Link
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              to="/live-betting"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+            >
+              Live betting
+            </Link>
+            <Link
+              to="/esports"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+            >
+              Esports
+            </Link>
+            <Link
+              to="/casino"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+            >
+              Casino
+            </Link>
+            <Link
+              to="/slot-machines"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+            >
+              Slot machines
+            </Link>
+            <Link
+              to="/faq"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+            >
+              FAQ
+            </Link>
             {navItems.map((item) => (
               item.isAnchor ? (
                 <a
