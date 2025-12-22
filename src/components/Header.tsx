@@ -22,7 +22,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <span className="text-2xl font-extrabold tracking-tight">
             <span className="text-primary">BET</span>
             <span className="text-foreground">LABEL</span>
@@ -33,7 +33,7 @@ const Header = () => {
             </div>
             <Gift className="w-6 h-6 text-accent animate-float" />
           </div>
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-1">
