@@ -3,7 +3,7 @@ import { Monitor } from 'lucide-react';
 
 const WelcomeSection = () => {
   return (
-    <section className="container py-12 lg:py-16">
+    <section id="welcome" className="container py-12 lg:py-16 scroll-mt-32">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Image/Device Mockup */}
         <div className="relative order-2 lg:order-1">

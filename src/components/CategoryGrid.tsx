@@ -11,7 +11,7 @@ const categories = [
 
 const CategoryGrid = () => {
   return (
-    <section className="container py-8">
+    <section id="categories" className="container py-8 scroll-mt-32">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {categories.map((category) => (
           <a

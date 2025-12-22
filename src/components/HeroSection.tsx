@@ -36,7 +36,7 @@ const HeroSection = () => {
   const formatTime = (num: number) => num.toString().padStart(2, '0');
 
   return (
-    <section className="container py-8 lg:py-12">
+    <section id="hero" className="container py-8 lg:py-12 scroll-mt-32">
       <div className="grid lg:grid-cols-2 gap-8 items-start">
         {/* Left Content */}
         <div>

@@ -3,15 +3,15 @@ import { Button } from '@/components/ui/button';
 import { Menu, X, Gift } from 'lucide-react';
 
 const navItems = [
-  'Welcome to BetLabel',
-  'Why choose us',
-  'Sports betting',
-  'Popular sports',
-  'Live betting',
-  'Esports',
-  'Casino',
-  'Slot machines',
-  'Live Casino',
+  { name: 'Welcome to BetLabel', href: '#welcome' },
+  { name: 'Why choose us', href: '#features' },
+  { name: 'Sports betting', href: '#categories' },
+  { name: 'Popular sports', href: '#categories' },
+  { name: 'Live betting', href: '#categories' },
+  { name: 'Esports', href: '#categories' },
+  { name: 'Casino', href: '#categories' },
+  { name: 'Slot machines', href: '#categories' },
+  { name: 'FAQ', href: '#faq' },
 ];
 
 const Header = () => {
@@ -66,11 +66,11 @@ const Header = () => {
           <nav className="flex items-center gap-6 overflow-x-auto scrollbar-hide">
             {navItems.map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.name}
+                href={item.href}
                 className="text-sm text-muted-foreground hover:text-primary whitespace-nowrap transition-colors duration-200"
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </nav>
@@ -83,11 +83,12 @@ const Header = () => {
           <nav className="container py-4 flex flex-col gap-2">
             {navItems.map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.name}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
                 className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
               >
-                {item}
+                {item.name}
               </a>
             ))}
             <div className="flex gap-2 mt-4 sm:hidden">

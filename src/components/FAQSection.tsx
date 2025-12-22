@@ -30,7 +30,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="container py-12 lg:py-16">
+    <section id="faq" className="container py-12 lg:py-16 scroll-mt-32">
       <h2 className="text-2xl lg:text-3xl font-bold text-center text-foreground mb-4">
         Frequently Asked <span className="text-primary">Questions</span>
       </h2>
