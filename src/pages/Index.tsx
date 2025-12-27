@@ -4,6 +4,7 @@ import CategoryGrid from '@/components/CategoryGrid';
 import WelcomeSection from '@/components/WelcomeSection';
 import BettingTable from '@/components/BettingTable';
 import PromotionsCarousel from '@/components/PromotionsCarousel';
+import PromoBanner from '@/components/PromoBanner';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 
@@ -17,6 +18,7 @@ const Index = () => {
         <WelcomeSection />
         <BettingTable />
         <PromotionsCarousel />
+        <PromoBanner />
         <FAQSection />
       </main>
       <Footer />

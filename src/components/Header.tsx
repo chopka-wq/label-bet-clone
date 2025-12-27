@@ -5,7 +5,6 @@ import { Menu, X, Gift } from 'lucide-react';
 
 const navItems = [
   { name: 'Welcome to BetLabel', href: '/#welcome', isAnchor: true },
-  { name: 'Why choose us', href: '/why-choose-us', isAnchor: false },
   { name: 'Sports betting', href: '/#categories', isAnchor: true },
   { name: 'Popular sports', href: '/#categories', isAnchor: true },
 ];
@@ -26,7 +25,7 @@ const Header = () => {
             <div className="w-8 h-6 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-sm flex items-center justify-center">
               <span className="text-xs font-bold text-foreground">EN</span>
             </div>
-            <Gift className="w-6 h-6 text-accent animate-float" />
+            <Gift className="w-7 h-7 text-accent animate-float" />
           </div>
         </div>
 
@@ -46,6 +45,9 @@ const Header = () => {
           </Link>
           <Link to="/slot-machines" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             Slot machines
+          </Link>
+          <Link to="/why-choose-us" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+            Why choose us
           </Link>
           <Link to="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             FAQ
@@ -138,6 +140,13 @@ const Header = () => {
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
               Slot machines
+            </Link>
+            <Link
+              to="/why-choose-us"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
+            >
+              Why choose us
             </Link>
             <Link
               to="/faq"
