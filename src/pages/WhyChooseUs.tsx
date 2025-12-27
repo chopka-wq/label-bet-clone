@@ -6,7 +6,7 @@ const features = [
   {
     icon: Shield,
     title: 'Secure & Licensed',
-    description: '111111111Fully licensed and regulated platform with top-tier security protocols. We use advanced encryption technology to protect your personal data and financial transactions.',
+    description: 'Fully licensed and regulated platform with top-tier security protocols. We use advanced encryption technology to protect your personal data and financial transactions.',
   },
   {
     icon: Zap,
