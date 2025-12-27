@@ -89,41 +89,41 @@ const FAQ = () => {
 
           {/* Contact Support */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card className="gradient-card border-border hover:border-primary transition-all duration-300">
+            <Card className="gradient-card border-border hover:border-primary transition-all duration-300 h-full flex flex-col">
               <CardHeader>
                 <MessageCircle className="h-8 w-8 text-primary mb-2" />
                 <CardTitle>Live Chat</CardTitle>
                 <CardDescription>Available 24/7</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1 flex flex-col">
                 <p className="text-sm text-muted-foreground mb-4">Get instant help from our support team</p>
-                <button className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition-colors">
+                <button className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition-colors mt-auto">
                   Start Chat
                 </button>
               </CardContent>
             </Card>
-            <Card className="gradient-card border-border hover:border-primary transition-all duration-300">
+            <Card className="gradient-card border-border hover:border-primary transition-all duration-300 h-full flex flex-col">
               <CardHeader>
                 <Mail className="h-8 w-8 text-primary mb-2" />
                 <CardTitle>Email Support</CardTitle>
                 <CardDescription>support@betlabel.com</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1 flex flex-col">
                 <p className="text-sm text-muted-foreground mb-4">Send us an email and we'll respond within 24 hours</p>
-                <button className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition-colors">
+                <button className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition-colors mt-auto">
                   Send Email
                 </button>
               </CardContent>
             </Card>
-            <Card className="gradient-card border-border hover:border-primary transition-all duration-300">
+            <Card className="gradient-card border-border hover:border-primary transition-all duration-300 h-full flex flex-col">
               <CardHeader>
                 <Phone className="h-8 w-8 text-primary mb-2" />
                 <CardTitle>Phone Support</CardTitle>
                 <CardDescription>+1-800-BETLABEL</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1 flex flex-col">
                 <p className="text-sm text-muted-foreground mb-4">Call us for immediate assistance</p>
-                <button className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition-colors">
+                <button className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition-colors mt-auto">
                   Call Now
                 </button>
               </CardContent>
