@@ -3,8 +3,15 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Clock, Users, TrendingUp } from 'lucide-react';
+import ImageTextSection from '@/components/ImageTextSection';
+import StickyRegisterButton from '@/components/StickyRegisterButton';
+import PageWrapper from '@/components/PageWrapper';
+import { useLanguage } from '@/hooks/useLanguage';
+import { getTranslation } from '@/utils/translations';
 
 const LiveBetting = () => {
+  const { language } = useLanguage();
+  const t = getTranslation(language);
   const liveEvents = [
     { id: 1, sport: 'Football', match: 'Real Madrid vs Barcelona', time: '45\'', odds: '2.10', status: 'Live' },
     { id: 2, sport: 'Basketball', match: 'Lakers vs Warriors', time: 'Q3 8:32', odds: '1.85', status: 'Live' },
@@ -14,19 +21,36 @@ const LiveBetting = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <section className="container py-12 lg:py-20">
-          {/* Hero */}
-          <div className="text-center mb-16">
-            <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
-              <span className="text-primary">Live</span> Betting
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Experience the thrill of live betting with real-time odds and instant updates. Bet on your favorite sports as the action unfolds.
-            </p>
-          </div>
+    <PageWrapper
+      title={`${t.liveBetting.title} - BetLabel`}
+      description={t.liveBetting.subtitle}
+    >
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pb-20 sm:pb-0">
+          <section className="container py-12 lg:py-20">
+            {/* Hero */}
+            <div className="text-center mb-16">
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
+                <span className="text-primary">{t.liveBetting.title.split(' ')[0]}</span> {t.liveBetting.title.split(' ').slice(1).join(' ')}
+              </h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                {t.liveBetting.subtitle}
+              </p>
+            </div>
+
+            {/* Image Text Section */}
+            <ImageTextSection
+              title={
+                <>
+                  {t.liveBetting.imageTextTitle.split('Action')[0].trim()}{' '}
+                  <span className="text-primary">Action</span>
+                </>
+              }
+              text={t.liveBetting.imageTextContent}
+              imageLeft={true}
+              buttonText={t.buttons.startLiveBetting}
+            />
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -89,10 +113,14 @@ const LiveBetting = () => {
               </Card>
             ))}
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <div className="pb-20 sm:pb-0">
+          <Footer />
+        </div>
+        <StickyRegisterButton />
+      </div>
+    </PageWrapper>
   );
 };
 

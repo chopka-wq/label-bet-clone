@@ -1,16 +1,18 @@
 import { Button } from '@/components/ui/button';
-import { Monitor } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
-import { getTranslation } from '@/utils/translations';
 
-const WelcomeSection = () => {
-  const { language } = useLanguage();
-  const t = getTranslation(language);
+interface ImageTextSectionProps {
+  title: React.ReactNode;
+  text: string;
+  imageLeft?: boolean;
+  buttonText?: string;
+}
+
+const ImageTextSection = ({ title, text, imageLeft = false, buttonText }: ImageTextSectionProps) => {
   return (
-    <section id="welcome" className="container py-12 lg:py-16 scroll-mt-32">
+    <section className="container py-12 lg:py-16">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Image/Device Mockup */}
-        <div className="relative order-2 lg:order-1">
+        <div className={`relative ${imageLeft ? 'order-1' : 'order-2 lg:order-1'}`}>
           <div className="gradient-card rounded-2xl p-8 border border-border shadow-card">
             <div className="relative">
               {/* Laptop mockup */}
@@ -53,28 +55,23 @@ const WelcomeSection = () => {
         </div>
 
         {/* Content */}
-        <div className="order-1 lg:order-2">
+        <div className={imageLeft ? 'order-2 lg:order-2' : 'order-1 lg:order-2'}>
           <h2 className="text-2xl lg:text-4xl font-bold text-foreground mb-6">
-            {t.index.welcomeTitle.includes('BetLabel') ? (
-              <>
-                {t.index.welcomeTitle.split('BetLabel')[0]}
-                <span className="text-primary">BetLabel</span>
-                {t.index.welcomeTitle.split('BetLabel')[1]}
-              </>
-            ) : (
-              t.index.welcomeTitle
-            )}
+            {title}
           </h2>
           <p className="text-muted-foreground leading-relaxed mb-8">
-            {t.index.welcomeText}
+            {text}
           </p>
-          <Button variant="hero" size="lg">
-            {t.buttons.joinNow}
-          </Button>
+          {buttonText && (
+            <Button variant="hero" size="lg">
+              {buttonText}
+            </Button>
+          )}
         </div>
       </div>
     </section>
   );
 };
 
-export default WelcomeSection;
+export default ImageTextSection;
+

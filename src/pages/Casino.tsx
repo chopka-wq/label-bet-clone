@@ -4,8 +4,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dice6, Coins, Sparkles, Crown } from 'lucide-react';
+import ImageTextSection from '@/components/ImageTextSection';
+import StickyRegisterButton from '@/components/StickyRegisterButton';
+import PageWrapper from '@/components/PageWrapper';
+import { useLanguage } from '@/hooks/useLanguage';
+import { getTranslation } from '@/utils/translations';
 
 const Casino = () => {
+  const { language } = useLanguage();
+  const t = getTranslation(language);
   const casinoGames = [
     { id: 1, name: 'Blackjack Classic', provider: 'Evolution Gaming', minBet: '€5', maxBet: '€10,000', type: 'Table Game' },
     { id: 2, name: 'European Roulette', provider: 'NetEnt', minBet: '€1', maxBet: '€5,000', type: 'Table Game' },
@@ -22,22 +29,39 @@ const Casino = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <section className="container py-12 lg:py-20">
-          {/* Hero */}
-          <div className="text-center mb-16">
-            <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
-              <span className="text-primary">Casino</span> Games
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Experience the thrill of classic casino games with live dealers and premium gaming experience. Play blackjack, roulette, baccarat and more.
-            </p>
-          </div>
+    <PageWrapper
+      title={`${t.casino.title} - BetLabel`}
+      description={t.casino.subtitle}
+    >
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pb-20 sm:pb-0">
+          <section className="container py-12 lg:py-20">
+            {/* Hero */}
+            <div className="text-center mb-16">
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
+                <span className="text-primary">{t.casino.title.split(' ')[0]}</span> {t.casino.title.split(' ').slice(1).join(' ')}
+              </h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                {t.casino.subtitle}
+              </p>
+            </div>
 
-          {/* Categories */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            {/* Image Text Section */}
+            <ImageTextSection
+              title={
+                <>
+                  {t.casino.imageTextTitle.replace('Casino Experience', '').trim()}{' '}
+                  <span className="text-primary">Casino Experience</span>
+                </>
+              }
+              text={t.casino.imageTextContent}
+              imageLeft={true}
+              buttonText={t.buttons.playNow}
+            />
+
+            {/* Categories */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {categories.map((category) => (
               <Card key={category.name} className="gradient-card border-border hover:border-primary transition-all duration-300 cursor-pointer">
                 <CardHeader className="text-center">
@@ -46,15 +70,15 @@ const Casino = () => {
                 </CardHeader>
                 <CardContent className="text-center">
                   <div className="text-2xl font-bold text-primary">{category.count}</div>
-                  <CardDescription>Games Available</CardDescription>
+                  <CardDescription>{t.casino.gamesAvailable}</CardDescription>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          {/* Casino Games */}
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-foreground mb-6">Featured Games</h2>
+            {/* Casino Games */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-foreground mb-6">{t.casino.featuredGames}</h2>
             {casinoGames.map((game) => (
               <Card key={game.id} className="gradient-card border-border hover:border-primary transition-all duration-300">
                 <CardHeader>
@@ -78,7 +102,7 @@ const Casino = () => {
                     </div>
                     <div className="flex items-end">
                       <Button className="w-full" variant="default">
-                        Play Now
+                        {t.buttons.playNow}
                       </Button>
                     </div>
                   </div>
@@ -86,10 +110,14 @@ const Casino = () => {
               </Card>
             ))}
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <div className="pb-20 sm:pb-0">
+          <Footer />
+        </div>
+        <StickyRegisterButton />
+      </div>
+    </PageWrapper>
   );
 };
 

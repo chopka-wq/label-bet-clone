@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Copy, Check } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
+import { getTranslation } from '@/utils/translations';
 
 const HeroSection = () => {
+  const { language } = useLanguage();
+  const t = getTranslation(language);
   const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 2, seconds: 55 });
 
@@ -38,18 +42,18 @@ const HeroSection = () => {
   return (
     <section id="hero" className="container py-8 lg:py-12 scroll-mt-32">
       <div className="grid lg:grid-cols-2 gap-8 items-start">
-        {/* Left Content */}
-        <div>
+        {/* Left Content - на мобилке второй, на десктопе первый */}
+        <div className="order-2 lg:order-1">
           <h1 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-            BetLabel
+            {t.index.heroTitle}
           </h1>
           <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
-            Nowadays, gambling has become a kind of spice for everyday life: humanity has strived so long and hard for comfort and security, and now that it has achieved them, it suddenly realises that it is rather boring. However, sports betting and casino games allow us to get our adrenaline pumping, even though we never actually leave our comfort zone, and this is precisely the compromise that satisfies the needs of the majority. Today, in search of gambling, you don't even have to leave your home, although you can go out and play on the go: online platforms solve the problem of universal access, and one of the most successful in the industry is BetLabel.
+            {t.index.heroText}
           </p>
         </div>
 
-        {/* Bonus Card */}
-        <div className="gradient-card rounded-2xl p-6 lg:p-8 border border-border shadow-card relative overflow-hidden">
+        {/* Bonus Card - на мобилке первый, на десктопе второй */}
+        <div className="order-1 lg:order-2 gradient-card rounded-2xl p-6 lg:p-8 border border-border shadow-card relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
@@ -94,7 +98,7 @@ const HeroSection = () => {
 
             {/* CTA Button */}
             <Button variant="hero" size="xl" className="w-full">
-              GET BONUS
+              {t.buttons.getBonus}
             </Button>
           </div>
         </div>

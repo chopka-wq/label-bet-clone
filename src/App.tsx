@@ -21,6 +21,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* English routes */}
           <Route path="/" element={<Index />} />
           <Route path="/why-choose-us" element={<WhyChooseUs />} />
           <Route path="/live-betting" element={<LiveBetting />} />
@@ -28,6 +29,16 @@ const App = () => (
           <Route path="/casino" element={<Casino />} />
           <Route path="/slot-machines" element={<SlotMachines />} />
           <Route path="/faq" element={<FAQ />} />
+          
+          {/* Polish routes */}
+          <Route path="/pl" element={<Index />} />
+          <Route path="/pl/why-choose-us" element={<WhyChooseUs />} />
+          <Route path="/pl/live-betting" element={<LiveBetting />} />
+          <Route path="/pl/esports" element={<Esports />} />
+          <Route path="/pl/casino" element={<Casino />} />
+          <Route path="/pl/slot-machines" element={<SlotMachines />} />
+          <Route path="/pl/faq" element={<FAQ />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

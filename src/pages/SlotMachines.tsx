@@ -5,8 +5,15 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Star, Zap, Trophy } from 'lucide-react';
+import ImageTextSection from '@/components/ImageTextSection';
+import StickyRegisterButton from '@/components/StickyRegisterButton';
+import PageWrapper from '@/components/PageWrapper';
+import { useLanguage } from '@/hooks/useLanguage';
+import { getTranslation } from '@/utils/translations';
 
 const SlotMachines = () => {
+  const { language } = useLanguage();
+  const t = getTranslation(language);
   const featuredSlots = [
     { id: 1, name: 'Mega Fortune', provider: 'NetEnt', rtp: '96.4%', volatility: 'Medium', jackpot: '€2.5M' },
     { id: 2, name: 'Starburst', provider: 'NetEnt', rtp: '96.1%', volatility: 'Low', jackpot: '€250K' },
@@ -24,23 +31,40 @@ const SlotMachines = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <section className="container py-12 lg:py-20">
-          {/* Hero */}
-          <div className="text-center mb-16">
-            <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
-              <span className="text-primary">Slot</span> Machines
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Spin the reels and win big with our collection of premium slot games. From classic fruit machines to modern video slots with massive jackpots.
-            </p>
-          </div>
+    <PageWrapper
+      title={`${t.slotMachines.title} - BetLabel`}
+      description={t.slotMachines.subtitle}
+    >
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pb-20 sm:pb-0">
+          <section className="container py-12 lg:py-20">
+            {/* Hero */}
+            <div className="text-center mb-16">
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
+                <span className="text-primary">{t.slotMachines.title.split(' ')[0]}</span> {t.slotMachines.title.split(' ').slice(1).join(' ')}
+              </h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                {t.slotMachines.subtitle}
+              </p>
+            </div>
 
-          {/* Popular Slots Carousel */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-foreground mb-6">Popular Slots</h2>
+            {/* Image Text Section */}
+            <ImageTextSection
+              title={
+                <>
+                  {t.slotMachines.imageTextTitle.replace('Premium Slots', '').trim()}{' '}
+                  <span className="text-primary">Premium Slots</span>
+                </>
+              }
+              text={t.slotMachines.imageTextContent}
+              imageLeft={false}
+              buttonText={t.buttons.exploreSlots}
+            />
+
+            {/* Popular Slots Carousel */}
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold text-foreground mb-6">{t.slotMachines.popularSlots}</h2>
             <Carousel
               opts={{
                 align: "start",
@@ -62,7 +86,7 @@ const SlotMachines = () => {
                           <span className="text-sm font-semibold">{slot.rating}</span>
                         </div>
                         <Button className="w-full" variant="default">
-                          Play Now
+                          {t.buttons.playNow}
                         </Button>
                       </CardContent>
                     </Card>
@@ -74,9 +98,9 @@ const SlotMachines = () => {
             </Carousel>
           </div>
 
-          {/* Featured Slots */}
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-foreground mb-6">Featured Slots</h2>
+            {/* Featured Slots */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-foreground mb-6">{t.slotMachines.featuredSlots}</h2>
             {featuredSlots.map((slot) => (
               <Card key={slot.id} className="gradient-card border-border hover:border-primary transition-all duration-300">
                 <CardHeader>
@@ -123,10 +147,14 @@ const SlotMachines = () => {
               </Card>
             ))}
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <div className="pb-20 sm:pb-0">
+          <Footer />
+        </div>
+        <StickyRegisterButton />
+      </div>
+    </PageWrapper>
   );
 };
 

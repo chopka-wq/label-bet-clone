@@ -1,6 +1,15 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Shield, Zap, Headphones, CreditCard, Globe, Award } from 'lucide-react';
+import ImageTextSection from '@/components/ImageTextSection';
+import StickyRegisterButton from '@/components/StickyRegisterButton';
+import PageWrapper from '@/components/PageWrapper';
+import { useLanguage } from '@/hooks/useLanguage';
+import { getTranslation } from '@/utils/translations';
+
+const WhyChooseUs = () => {
+  const { language } = useLanguage();
+  const t = getTranslation(language);
 
 const features = [
   {
@@ -35,21 +44,45 @@ const features = [
   },
 ];
 
-const WhyChooseUs = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <section className="container py-12 lg:py-20">
-          {/* Hero */}
-          <div className="text-center mb-16">
-            <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
-              Why Choose <span className="text-primary">BetLabel</span>?
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Experience the best in online betting and casino gaming with our premium features and unmatched service quality.
-            </p>
-          </div>
+    <PageWrapper
+      title={`${t.whyChooseUs.title} - BetLabel`}
+      description={t.whyChooseUs.subtitle}
+    >
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pb-20 sm:pb-0">
+          <section className="container py-12 lg:py-20">
+            {/* Hero */}
+            <div className="text-center mb-16">
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
+                {t.whyChooseUs.title.includes('BetLabel') ? (
+                  <>
+                    {t.whyChooseUs.title.split('BetLabel')[0]}
+                    <span className="text-primary">BetLabel</span>
+                    {t.whyChooseUs.title.split('BetLabel')[1]}
+                  </>
+                ) : (
+                  t.whyChooseUs.title
+                )}
+              </h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                {t.whyChooseUs.subtitle}
+              </p>
+            </div>
+
+            {/* Image Text Section */}
+            <ImageTextSection
+              title={
+                <>
+                  {t.whyChooseUs.imageTextTitle.replace('Betting Partner', '').trim()}{' '}
+                  <span className="text-primary">Betting Partner</span>
+                </>
+              }
+              text={t.whyChooseUs.imageTextContent}
+              imageLeft={true}
+              buttonText={t.buttons.joinNow}
+            />
 
           {/* Features Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -72,11 +105,18 @@ const WhyChooseUs = () => {
             ))}
           </div>
 
-          {/* Stats */}
-          <div className="gradient-card rounded-2xl p-8 lg:p-12 border border-border">
-            <h2 className="text-2xl lg:text-3xl font-bold text-center text-foreground mb-8">
-              Trusted by <span className="text-primary">Millions</span>
-            </h2>
+            {/* Stats */}
+            <div className="gradient-card rounded-2xl p-8 lg:p-12 border border-border">
+              <h2 className="text-2xl lg:text-3xl font-bold text-center text-foreground mb-8">
+                {t.whyChooseUs.trustedBy.includes('Millions') ? (
+                  <>
+                    {t.whyChooseUs.trustedBy.split('Millions')[0]}
+                    <span className="text-primary">Millions</span>
+                  </>
+                ) : (
+                  t.whyChooseUs.trustedBy
+                )}
+              </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">1M+</div>
@@ -96,10 +136,14 @@ const WhyChooseUs = () => {
               </div>
             </div>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <div className="pb-20 sm:pb-0">
+          <Footer />
+        </div>
+        <StickyRegisterButton />
+      </div>
+    </PageWrapper>
   );
 };
 

@@ -8,8 +8,15 @@ import {
 } from '@/components/ui/accordion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HelpCircle, MessageCircle, Mail, Phone } from 'lucide-react';
+import ImageTextSection from '@/components/ImageTextSection';
+import StickyRegisterButton from '@/components/StickyRegisterButton';
+import PageWrapper from '@/components/PageWrapper';
+import { useLanguage } from '@/hooks/useLanguage';
+import { getTranslation } from '@/utils/translations';
 
 const FAQ = () => {
+  const { language } = useLanguage();
+  const t = getTranslation(language);
   const faqItems = [
     {
       question: 'How do I create an account?',
@@ -45,7 +52,7 @@ const FAQ = () => {
     },
     {
       question: 'How do I contact customer support?',
-      answer: 'Our customer support team is available 24/7. You can reach us via live chat (available on the website), email at support@betlabel.com, or phone at +1-800-BETLABEL. We typically respond within minutes via live chat.',
+      answer: 'Our customer support team is available 24/7. You can reach us via live chat (available on the website), email, or phone. We typically respond within minutes via live chat.',
     },
     {
       question: 'Are my personal details safe?',
@@ -54,19 +61,43 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <section className="container py-12 lg:py-20">
-          {/* Hero */}
-          <div className="text-center mb-16">
-            <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
-              Frequently Asked <span className="text-primary">Questions</span>
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Find answers to the most common questions about BetLabel. Can't find what you're looking for? Contact our support team.
-            </p>
-          </div>
+    <PageWrapper
+      title={`${t.faq.title} - BetLabel`}
+      description={t.faq.subtitle}
+    >
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pb-20 sm:pb-0">
+          <section className="container py-12 lg:py-20">
+            {/* Hero */}
+            <div className="text-center mb-16">
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
+                {t.faq.title.includes('Questions') ? (
+                  <>
+                    {t.faq.title.split('Questions')[0]}
+                    <span className="text-primary">Questions</span>
+                  </>
+                ) : (
+                  t.faq.title
+                )}
+              </h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                {t.faq.subtitle}
+              </p>
+            </div>
+
+            {/* Image Text Section */}
+            <ImageTextSection
+              title={
+                <>
+                  {t.faq.imageTextTitle.replace('Know', '').trim()}{' '}
+                  <span className="text-primary">Know</span>
+                </>
+              }
+              text={t.faq.imageTextContent}
+              imageLeft={false}
+              buttonText={t.buttons.getStarted}
+            />
 
           {/* FAQ Accordion */}
           <div className="max-w-3xl mx-auto mb-12">
@@ -106,7 +137,7 @@ const FAQ = () => {
               <CardHeader>
                 <Mail className="h-8 w-8 text-primary mb-2" />
                 <CardTitle>Email Support</CardTitle>
-                <CardDescription>support@betlabel.com</CardDescription>
+                <CardDescription>support@example.com</CardDescription>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col">
                 <p className="text-sm text-muted-foreground mb-4">Send us an email and we'll respond within 24 hours</p>
@@ -129,10 +160,14 @@ const FAQ = () => {
               </CardContent>
             </Card>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <div className="pb-20 sm:pb-0">
+          <Footer />
+        </div>
+        <StickyRegisterButton />
+      </div>
+    </PageWrapper>
   );
 };
 
