@@ -16,12 +16,22 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Проверяем, есть ли уже языковой префикс
+  // Проверяем наличие двойных языковых префиксов (например, /pl/en/...)
+  const doubleLocalePattern = /^\/(pl|en)\/(pl|en)\//;
+  if (doubleLocalePattern.test(pathname)) {
+    // Удаляем первый префикс и оставляем второй
+    const cleanPath = pathname.replace(/^\/(pl|en)/, '');
+    const url = request.nextUrl.clone();
+    url.pathname = cleanPath;
+    return NextResponse.redirect(url);
+  }
+
+  // Проверяем, есть ли уже правильный языковой префикс
   const pathnameHasLocale = supportedLanguages.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  // Если есть языковой префикс, пропускаем
+  // Если есть правильный языковой префикс, пропускаем
   if (pathnameHasLocale) {
     return NextResponse.next();
   }

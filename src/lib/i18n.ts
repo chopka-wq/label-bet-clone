@@ -14,21 +14,35 @@ export function getLanguageFromPath(pathname: string): Language {
 }
 
 export function getPathWithoutLanguage(pathname: string): string {
-  if (pathname.startsWith('/pl')) {
+  // Удаляем языковой префикс если он есть
+  if (pathname.startsWith('/pl/')) {
     const path = pathname.replace('/pl', '') || '/';
     return path;
+  }
+  if (pathname.startsWith('/en/')) {
+    const path = pathname.replace('/en', '') || '/';
+    return path;
+  }
+  if (pathname === '/pl' || pathname === '/en') {
+    return '/';
   }
   return pathname;
 }
 
 export function getLocalizedPath(path: string, language: Language): string {
-  if (path.startsWith('/pl') || path.startsWith('/en')) {
-    return path;
+  // Сначала удаляем существующий языковой префикс
+  let cleanPath = path;
+  if (path.startsWith('/pl/') || path.startsWith('/en/')) {
+    cleanPath = path.replace(/^\/(pl|en)/, '') || '/';
+  } else if (path === '/pl' || path === '/en') {
+    cleanPath = '/';
   }
   
+  // Теперь добавляем нужный префикс
   if (language === 'pl') {
-    return `/pl${path}`;
+    return `/pl${cleanPath === '/' ? '' : cleanPath}`;
   }
-  return path;
+  // Для английского языка префикс /en обязателен
+  return `/en${cleanPath === '/' ? '' : cleanPath}`;
 }
 

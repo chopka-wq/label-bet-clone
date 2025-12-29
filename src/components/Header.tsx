@@ -52,9 +52,7 @@ const Header = ({ locale }: HeaderProps) => {
 
   const switchLanguage = (newLanguage: Language) => {
     const pathWithoutLang = getPathWithoutLanguage(currentPath);
-    const newPath = newLanguage === 'pl' 
-      ? `/pl${pathWithoutLang}`
-      : pathWithoutLang;
+    const newPath = getLocalizedPath(pathWithoutLang, newLanguage);
     
     router.push(newPath);
   };
