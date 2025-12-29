@@ -1,11 +1,18 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Monitor } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
+import { getLanguageFromPath, type Language } from '@/lib/i18n';
 import { getTranslation } from '@/utils/translations';
 
-const WelcomeSection = () => {
-  const { language } = useLanguage();
+interface WelcomeSectionProps {
+  locale?: string;
+}
+
+const WelcomeSection = ({ locale }: WelcomeSectionProps) => {
+  const language: Language = locale ? getLanguageFromPath(`/${locale}`) : 'en';
   const t = getTranslation(language);
+  
   return (
     <section id="welcome" className="container py-12 lg:py-16 scroll-mt-32">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">

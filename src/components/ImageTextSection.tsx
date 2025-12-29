@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 
 interface ImageTextSectionProps {
@@ -74,4 +76,3 @@ const ImageTextSection = ({ title, text, imageLeft = false, buttonText }: ImageT
 };
 
 export default ImageTextSection;
-

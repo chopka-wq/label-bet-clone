@@ -1,9 +1,15 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
-import { useLanguage } from '@/hooks/useLanguage';
+import { getLanguageFromPath, type Language } from '@/lib/i18n';
 import { getTranslation } from '@/utils/translations';
 
-const StickyRegisterButton = () => {
-  const { language } = useLanguage();
+interface StickyRegisterButtonProps {
+  locale?: string;
+}
+
+const StickyRegisterButton = ({ locale }: StickyRegisterButtonProps) => {
+  const language: Language = locale ? getLanguageFromPath(`/${locale}`) : 'en';
   const t = getTranslation(language);
 
   return (
@@ -18,4 +24,3 @@ const StickyRegisterButton = () => {
 };
 
 export default StickyRegisterButton;
-

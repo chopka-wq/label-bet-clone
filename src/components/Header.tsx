@@ -1,15 +1,26 @@
+'use client';
+
 import { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Gift, ChevronDown } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
+import { getLanguageFromPath, getPathWithoutLanguage, getLocalizedPath, type Language } from '@/lib/i18n';
 import { getTranslation } from '@/utils/translations';
 
-const Header = () => {
+interface HeaderProps {
+  locale?: string;
+}
+
+const Header = ({ locale }: HeaderProps) => {
+  const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef<HTMLDivElement>(null);
-  const { language, switchLanguage, getLocalizedPath } = useLanguage();
+  
+  const currentPath = pathname || '';
+  const language: Language = locale ? getLanguageFromPath(`/${locale}`) : getLanguageFromPath(currentPath);
   const t = getTranslation(language);
 
   const navItems = [
@@ -39,15 +50,28 @@ const Header = () => {
     };
   }, [languageMenuOpen]);
 
+  const switchLanguage = (newLanguage: Language) => {
+    const pathWithoutLang = getPathWithoutLanguage(currentPath);
+    const newPath = newLanguage === 'pl' 
+      ? `/pl${pathWithoutLang}`
+      : pathWithoutLang;
+    
+    router.push(newPath);
+  };
+
+  const getLocalizedLink = (path: string): string => {
+    return getLocalizedPath(path, language);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          <span className="text-xl sm:text-2xl font-extrabold tracking-tight">
+          <Link href={getLocalizedLink('/')} className="text-xl sm:text-2xl font-extrabold tracking-tight">
             <span className="text-primary">BET</span>
             <span className="text-foreground">LABEL</span>
-          </span>
+          </Link>
           <div className="flex items-center gap-2 ml-2">
             <div className="relative" ref={languageMenuRef}>
               <button
@@ -85,25 +109,25 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-4">
-          <Link to={getLocalizedPath('/')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+          <Link href={getLocalizedLink('/')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             {t.nav.home}
           </Link>
-          <Link to={getLocalizedPath('/live-betting')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+          <Link href={getLocalizedLink('/live-betting')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             {t.nav.liveBetting}
           </Link>
-          <Link to={getLocalizedPath('/esports')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+          <Link href={getLocalizedLink('/esports')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             {t.nav.esports}
           </Link>
-          <Link to={getLocalizedPath('/casino')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+          <Link href={getLocalizedLink('/casino')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             {t.nav.casino}
           </Link>
-          <Link to={getLocalizedPath('/slot-machines')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+          <Link href={getLocalizedLink('/slot-machines')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             {t.nav.slotMachines}
           </Link>
-          <Link to={getLocalizedPath('/why-choose-us')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+          <Link href={getLocalizedLink('/why-choose-us')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             {t.nav.whyChooseUs}
           </Link>
-          <Link to={getLocalizedPath('/faq')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+          <Link href={getLocalizedLink('/faq')} className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
             {t.nav.faq}
           </Link>
         </nav>
@@ -138,7 +162,7 @@ const Header = () => {
               item.isAnchor ? (
                 <a
                   key={item.name}
-                  href={getLocalizedPath(item.href)}
+                  href={getLocalizedLink(item.href)}
                   className="text-sm text-muted-foreground hover:text-primary whitespace-nowrap transition-colors duration-200"
                 >
                   {item.name}
@@ -146,7 +170,7 @@ const Header = () => {
               ) : (
                 <Link
                   key={item.name}
-                  to={getLocalizedPath(item.href)}
+                  href={getLocalizedLink(item.href)}
                   className="text-sm text-muted-foreground hover:text-primary whitespace-nowrap transition-colors duration-200"
                 >
                   {item.name}
@@ -162,49 +186,49 @@ const Header = () => {
         <div className="lg:hidden border-t border-border bg-background w-full">
           <nav className="container py-4 flex flex-col gap-2 px-4">
             <Link
-              to={getLocalizedPath('/')}
+              href={getLocalizedLink('/')}
               onClick={() => setMobileMenuOpen(false)}
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
               {t.nav.home}
             </Link>
             <Link
-              to={getLocalizedPath('/live-betting')}
+              href={getLocalizedLink('/live-betting')}
               onClick={() => setMobileMenuOpen(false)}
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
               {t.nav.liveBetting}
             </Link>
             <Link
-              to={getLocalizedPath('/esports')}
+              href={getLocalizedLink('/esports')}
               onClick={() => setMobileMenuOpen(false)}
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
               {t.nav.esports}
             </Link>
             <Link
-              to={getLocalizedPath('/casino')}
+              href={getLocalizedLink('/casino')}
               onClick={() => setMobileMenuOpen(false)}
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
               {t.nav.casino}
             </Link>
             <Link
-              to={getLocalizedPath('/slot-machines')}
+              href={getLocalizedLink('/slot-machines')}
               onClick={() => setMobileMenuOpen(false)}
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
               {t.nav.slotMachines}
             </Link>
             <Link
-              to={getLocalizedPath('/why-choose-us')}
+              href={getLocalizedLink('/why-choose-us')}
               onClick={() => setMobileMenuOpen(false)}
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
               {t.nav.whyChooseUs}
             </Link>
             <Link
-              to={getLocalizedPath('/faq')}
+              href={getLocalizedLink('/faq')}
               onClick={() => setMobileMenuOpen(false)}
               className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
             >
@@ -214,7 +238,7 @@ const Header = () => {
               item.isAnchor ? (
                 <a
                   key={item.name}
-                  href={getLocalizedPath(item.href)}
+                  href={getLocalizedLink(item.href)}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
                 >
@@ -223,7 +247,7 @@ const Header = () => {
               ) : (
                 <Link
                   key={item.name}
-                  to={getLocalizedPath(item.href)}
+                  href={getLocalizedLink(item.href)}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-sm text-muted-foreground hover:text-primary py-2 transition-colors"
                 >

@@ -1,11 +1,17 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Copy, Check } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
+import { getLanguageFromPath, type Language } from '@/lib/i18n';
 import { getTranslation } from '@/utils/translations';
 
-const HeroSection = () => {
-  const { language } = useLanguage();
+interface HeroSectionProps {
+  locale?: string;
+}
+
+const HeroSection = ({ locale }: HeroSectionProps) => {
+  const language: Language = locale ? getLanguageFromPath(`/${locale}`) : 'en';
   const t = getTranslation(language);
   const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 2, seconds: 55 });

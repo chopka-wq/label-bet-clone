@@ -1,4 +1,10 @@
+'use client';
+
 import { Mail, MessageCircle, Phone } from 'lucide-react';
+
+interface FooterProps {
+  locale?: string;
+}
 
 const footerLinks = {
   Games: ['Slots', 'Live Casino', 'Table Games', 'Jackpots'],
@@ -7,7 +13,7 @@ const footerLinks = {
   Legal: ['Terms of Service', 'Privacy Policy', 'Responsible Gaming', 'Licenses'],
 };
 
-const Footer = () => {
+const Footer = ({ locale }: FooterProps) => {
   return (
     <footer className="border-t border-border bg-card/50">
       <div className="container py-12 lg:py-16">
