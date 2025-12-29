@@ -15,9 +15,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale } = params;
   const language = getLanguageFromPath(`/${locale}`) || 'en';
   const t = getTranslation(language);
   const currentPath = locale === 'en' ? '/en/live-betting' : `/pl/live-betting`;
@@ -39,9 +39,9 @@ export async function generateMetadata({
 export default async function LiveBettingPage({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale } = await params;
+  const { locale } = params;
   const language = getLanguageFromPath(`/${locale}`) || 'en';
   const t = getTranslation(language);
 

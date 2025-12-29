@@ -7,6 +7,9 @@ export function getLanguageFromPath(pathname: string): Language {
   if (pathname.startsWith('/pl')) {
     return 'pl';
   }
+  if (pathname.startsWith('/en')) {
+    return 'en';
+  }
   return 'en';
 }
 
