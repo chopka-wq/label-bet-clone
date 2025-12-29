@@ -1,3 +1,5 @@
+'use client';
+
 import { Gamepad2, Trophy, Radio, Joystick, Swords, Gift } from 'lucide-react';
 
 const categories = [

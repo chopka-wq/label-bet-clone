@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -32,24 +34,22 @@ const BettingTable = () => {
 
       <Card className="gradient-card border-border">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-primary" />
-            Best Odds
-          </CardTitle>
-          <CardDescription>Live odds updated in real-time</CardDescription>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-xl">Live Odds</CardTitle>
+            <Badge variant="outline" className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4" />
+              Updated
+            </Badge>
+          </div>
+          <CardDescription>Real-time betting odds for upcoming matches</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[200px]">Sport</TableHead>
+                <TableHead>Sport</TableHead>
                 <TableHead>Match</TableHead>
-                <TableHead className="text-center">
-                  <div className="flex items-center justify-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    Date & Time
-                  </div>
-                </TableHead>
+                <TableHead>Date</TableHead>
                 <TableHead className="text-center">1</TableHead>
                 <TableHead className="text-center">X</TableHead>
                 <TableHead className="text-center">2</TableHead>
@@ -57,12 +57,17 @@ const BettingTable = () => {
             </TableHeader>
             <TableBody>
               {upcomingMatches.map((match) => (
-                <TableRow key={match.id} className="hover:bg-muted/50 transition-colors">
+                <TableRow key={match.id} className="hover:bg-secondary/50">
                   <TableCell>
                     <Badge variant="outline">{match.sport}</Badge>
                   </TableCell>
                   <TableCell className="font-medium">{match.match}</TableCell>
-                  <TableCell className="text-center text-muted-foreground">{match.date}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-muted-foreground" />
+                      {match.date}
+                    </div>
+                  </TableCell>
                   <TableCell className="text-center">
                     <span className="font-bold text-primary">{match.odds1}</span>
                   </TableCell>
@@ -87,4 +92,3 @@ const BettingTable = () => {
 };
 
 export default BettingTable;
-

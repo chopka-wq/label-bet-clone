@@ -1,16 +1,22 @@
-import Header from '@/src/components/Header';
-import HeroSection from '@/src/components/HeroSection';
-import CategoryGrid from '@/src/components/CategoryGrid';
-import WelcomeSection from '@/src/components/WelcomeSection';
-import BettingTable from '@/src/components/BettingTable';
-import PromotionsCarousel from '@/src/components/PromotionsCarousel';
-import CurrentPromotions from '@/src/components/CurrentPromotions';
-import FAQSection from '@/src/components/FAQSection';
-import Footer from '@/src/components/Footer';
-import StickyRegisterButton from '@/src/components/StickyRegisterButton';
-import { getLanguageFromPath } from '@/src/lib/i18n';
-import { getTranslation } from '@/src/utils/translations';
+import Header from '@/components/Header';
+import HeroSection from '@/components/HeroSection';
+import CategoryGrid from '@/components/CategoryGrid';
+import WelcomeSection from '@/components/WelcomeSection';
+import BettingTable from '@/components/BettingTable';
+import PromotionsCarousel from '@/components/PromotionsCarousel';
+import CurrentPromotions from '@/components/CurrentPromotions';
+import FAQSection from '@/components/FAQSection';
+import Footer from '@/components/Footer';
+import StickyRegisterButton from '@/components/StickyRegisterButton';
+import { getLanguageFromPath, supportedLanguages } from '@/lib/i18n';
+import { getTranslation } from '@/utils/translations';
 import { Metadata } from 'next';
+
+export async function generateStaticParams() {
+  return supportedLanguages.map((locale) => ({
+    locale,
+  }));
+}
 
 export async function generateMetadata({
   params,

@@ -1,5 +1,3 @@
-import { headers } from 'next/headers';
-
 export type Language = 'en' | 'pl';
 
 export const defaultLanguage: Language = 'en';

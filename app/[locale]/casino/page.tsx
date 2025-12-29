@@ -1,10 +1,16 @@
-import Header from '@/src/components/Header';
-import ImageTextSection from '@/src/components/ImageTextSection';
-import Footer from '@/src/components/Footer';
-import StickyRegisterButton from '@/src/components/StickyRegisterButton';
-import { getLanguageFromPath } from '@/src/lib/i18n';
-import { getTranslation } from '@/src/utils/translations';
+import Header from '@/components/Header';
+import ImageTextSection from '@/components/ImageTextSection';
+import Footer from '@/components/Footer';
+import StickyRegisterButton from '@/components/StickyRegisterButton';
+import { getLanguageFromPath, supportedLanguages } from '@/lib/i18n';
+import { getTranslation } from '@/utils/translations';
 import { Metadata } from 'next';
+
+export async function generateStaticParams() {
+  return supportedLanguages.map((locale) => ({
+    locale,
+  }));
+}
 
 export async function generateMetadata({
   params,
