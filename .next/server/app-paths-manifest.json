@@ -1,0 +1,12 @@
+{
+  "/[locale]/casino/page": "app/[locale]/casino/page.js",
+  "/[locale]/esports/page": "app/[locale]/esports/page.js",
+  "/[locale]/faq/page": "app/[locale]/faq/page.js",
+  "/[locale]/live-betting/page": "app/[locale]/live-betting/page.js",
+  "/[locale]/page": "app/[locale]/page.js",
+  "/[locale]/slot-machines/page": "app/[locale]/slot-machines/page.js",
+  "/[locale]/why-choose-us/page": "app/[locale]/why-choose-us/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js"
+}

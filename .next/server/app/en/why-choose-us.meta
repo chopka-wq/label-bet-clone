@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/[locale]/layout,_N_T_/[locale]/why-choose-us/layout,_N_T_/[locale]/why-choose-us/page,_N_T_/en/why-choose-us"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/$d$locale/why-choose-us/__PAGE__",
+    "/$d$locale/why-choose-us",
+    "/$d$locale",
+    "/_index",
+    "/_head"
+  ]
+}
